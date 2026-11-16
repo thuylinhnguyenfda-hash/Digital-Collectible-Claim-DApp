@@ -1,0 +1,224 @@
+/* ============================================================
+   GIAO DIỆN DAPP
+   Màu sắc khai báo thành biến ở đầu file, chỉnh một chỗ là đổi hết.
+   ============================================================ */
+
+
+/* ---------- 1. BIẾN MÀU (chế độ sáng) ---------- */
+:root {
+  --bg: #eef1f4;          /* nền trang */
+  --card: #ffffff;        /* nền thẻ */
+  --text: #14213d;        /* chữ chính */
+  --muted: #5b6678;       /* chữ phụ */
+  --line: #d5dbe3;        /* đường viền */
+  --accent: #2f54eb;      /* màu nhấn (nút) */
+  --on-accent: #ffffff;   /* chữ trên nút */
+  --ok: #0f8a5f;          /* thành công */
+  --bad: #c2303a;         /* lỗi */
+  --cell: #e3e8ee;        /* ô vật phẩm chưa phát */
+}
+
+/* ---------- 2. BIẾN MÀU (chế độ tối) ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1420;
+    --card: #161e2e;
+    --text: #e8edf5;
+    --muted: #98a3b8;
+    --line: #2a3550;
+    --accent: #6d8cff;
+    --on-accent: #0e1420;
+    --ok: #3ccf91;
+    --bad: #ff6b73;
+    --cell: #222c42;
+  }
+}
+
+
+/* ---------- 3. CÀI ĐẶT CHUNG ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 28px 18px 48px;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: clamp(32px, 7vw, 56px);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.lead {
+  max-width: 60ch;
+  margin: 0 0 24px;
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+
+/* ---------- 4. BỐ CỤC ---------- */
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+/* Lưới 2 cột; trên màn hình nhỏ chuyển thành 1 cột */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.wide {
+  grid-column: 1 / -1;   /* thẻ rộng hết hàng */
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ---------- 5. THẺ ---------- */
+.card {
+  padding: 18px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.big-number {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+
+/* ---------- 6. NÚT BẤM VÀ Ô NHẬP ---------- */
+button {
+  padding: 10px 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+input {
+  width: 100%;
+  margin: 6px 0 10px;
+  padding: 10px 12px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+
+/* ---------- 7. HUY HIỆU TRẠNG THÁI ---------- */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.badge.ok {
+  color: var(--ok);
+  border-color: var(--ok);
+}
+
+.badge.bad {
+  color: var(--bad);
+  border-color: var(--bad);
+}
+
+
+/* ---------- 8. BẢN ĐỒ 100 Ô VẬT PHẨM ---------- */
+.vault {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 4px;
+  margin-top: 14px;
+}
+
+.vault i {
+  aspect-ratio: 1;
+  background: var(--cell);
+  border-radius: 4px;
+}
+
+.vault i.taken {
+  background: var(--accent);   /* ô đã được phát hành */
+}
+
+
+/* ---------- 9. THÔNG BÁO VÀ NHẬT KÝ ---------- */
+#message {
+  min-height: 22px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+#message.success { color: var(--ok); }
+#message.error   { color: var(--bad); }
+
+#logList {
+  max-height: 150px;
+  margin: 0;
+  padding-left: 18px;
+  overflow: auto;
+  font-size: 14px;
+}

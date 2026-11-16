@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digital Collectible Claim</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <main>
+
+    <!-- ========== THANH TRÊN CÙNG ========== -->
+    <header class="topbar">
+      <span class="badge" id="networkBadge">Chưa kết nối</span>
+      <button id="connectBtn">Kết nối MetaMask</button>
+    </header>
+
+    <h1>Vật phẩm kỷ niệm số của câu lạc bộ</h1>
+    <p class="lead">
+      100 vật phẩm, miễn phí. Quản lý xác nhận thành viên,
+      mỗi ví nhận đúng một vật phẩm.
+    </p>
+
+    <div class="grid">
+
+      <!-- ========== 1. NHẬP ĐỊA CHỈ HỢP ĐỒNG ========== -->
+      <section class="card wide">
+        <h2>Hợp đồng</h2>
+        <label for="contractInput">Địa chỉ hợp đồng CollectibleClaim (Sepolia)</label>
+        <input id="contractInput" type="text" autocomplete="off">
+        <div class="row">
+          <button id="loadBtn">Tải hợp đồng</button>
+          <span class="muted" id="walletText">Ví: chưa kết nối</span>
+        </div>
+      </section>
+
+      <!-- ========== 2. NGUỒN CUNG ========== -->
+      <section class="card">
+        <h2>Nguồn cung còn lại</h2>
+        <div class="big-number" id="remainingText">–</div>
+        <div class="muted">Đã phát hành: <b id="claimedText">–</b> / 100</div>
+        <div class="vault" id="vault"></div>
+      </section>
+
+      <!-- ========== 3. QUYỀN NHẬN CỦA NGƯỜI DÙNG ========== -->
+      <section class="card">
+        <h2>Quyền nhận của bạn</h2>
+        <div class="row">
+          <span class="badge" id="authBadge">Quyền: –</span>
+          <span class="badge" id="claimBadge">Trạng thái: –</span>
+        </div>
+        <p class="muted" id="hintText">Kết nối ví và tải hợp đồng để xem quyền nhận.</p>
+        <button id="claimBtn" disabled>Nhận vật phẩm</button>
+        <div id="message" role="status"></div>
+      </section>
+
+      <!-- ========== 4. KHUNG QUẢN LÝ (chỉ hiện với ví quản lý) ========== -->
+      <section class="card wide" id="adminCard" hidden>
+        <h2>Quản lý: xác nhận thành viên</h2>
+        <label for="memberInput">Địa chỉ ví thành viên (nhiều ví: ngăn cách bằng dấu phẩy)</label>
+        <input id="memberInput" type="text" placeholder="0x...">
+        <button id="authorizeBtn">Xác nhận thành viên</button>
+      </section>
+
+
+      <!-- ========== 5. NHẬT KÝ SỰ KIỆN ========== -->
+      <section class="card wide">
+        <h2>Nhật ký sự kiện</h2>
+        <ul id="logList">
+          <li class="muted">Chưa có sự kiện.</li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Thư viện ethers.js (kết nối ví và blockchain) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.umd.min.js"></script>
+  <!-- Cấu hình: địa chỉ contract và ABI -->
+  <script src="js/config.js"></script>
+  <!-- Logic chính của DApp -->
+  <script src="js/app.js"></script>
+</body>
+
+</html>
